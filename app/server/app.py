@@ -5,10 +5,6 @@ from server.routes.vehicle import router as VehicleRouter
 from server.routes.house import router as HouseRouter
 from server.routes.house_log import router as HouseLogRouter
 from server.routes.recommendation import router as RecommendationRouter
-from server.routes.redeemable import router as RedeemableRouter
-from server.routes.redemption_history import router as RedemptionHistoryRouter
-from server.routes.user_points_transaction import router as UserPointsTransactionRouter
-from server.routes.ride import router as RideRouter
 from server.routes.authentication import router as AuthRouter
 from fastapi.staticfiles import StaticFiles
 from decouple import config
@@ -39,16 +35,6 @@ app.include_router(
     RecommendationRouter, tags=["Recommendation"], prefix="/recommendation"
 )
 
-app.include_router(VehicleRouter, tags=["Vehicle"], prefix="/vehicle")
-app.include_router(RedeemableRouter, tags=["Redeemable"], prefix="/redeemable")
-app.include_router(
-    RedemptionHistoryRouter, tags=["RedemptionHistory"], prefix="/redemption_history"
-)
-app.include_router(
-    UserPointsTransactionRouter,
-    tags=["UserPointsTransaction"],
-    prefix="/user_points_transaction",
-)
 app.include_router(RideRouter, tags=["Ride"], prefix="/ride")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
