@@ -35,7 +35,6 @@ app.include_router(
     RecommendationRouter, tags=["Recommendation"], prefix="/recommendation"
 )
 
-app.include_router(RideRouter, tags=["Ride"], prefix="/ride")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
