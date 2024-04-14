@@ -11,8 +11,8 @@ class UserSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "name": "Jane Doe",
-                "email": "jane.doe@wattio.com",
+                "name": "John Doe",
+                "email": "john.doe@wattio.com",
                 "password": "securepassword",
                 "house_id": "123"
             }
@@ -28,8 +28,8 @@ class UpdateUserModel(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "name": "Jane M. Doe",
-                "email": "jane.doe@wattio.com",
+                "name": "john M. Doe",
+                "email": "john.doe@wattio.com",
                 "password": "newpassword",
                 "house_id": "123"
             }

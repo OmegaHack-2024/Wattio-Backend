@@ -10,7 +10,6 @@ def user_helper(user) -> dict:
         "name": user["name"],
         "email": user["email"],
         "password": user.get("password", ""),
-        "points": user["points"],
     }
 
 
@@ -59,15 +58,3 @@ async def delete_user(id: str):
         return True
 
 
-async def update_user_points(user_id: str, points: float):
-    user = await user_collection.find_one({"_id": ObjectId(user_id)})
-    if not user:
-        return None
-
-    updated_points = user["points"] + points
-    updated_user = await user_collection.update_one(
-        {"_id": ObjectId(user_id)}, {"$set": {"points": updated_points}}
-    )
-    if updated_user.modified_count:
-        return True
-    return False

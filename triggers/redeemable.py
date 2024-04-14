@@ -6,7 +6,7 @@ BASE_URL = "http://localhost:8000"
 
 # Your user's credentials
 credentials = {
-    "username": "jane.doe@wattio.com",
+    "username": "john.doe@wattio.com",
     "password": "securepassword"
 }
 
