@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from server.routes.user import router as UserRouter
 from server.routes.vehicle import router as VehicleRouter
+from server.routes.house import router as HouseRouter
 from server.routes.recommendation import router as RecommendationRouter
 from server.routes.redeemable import router as RedeemableRouter
 from server.routes.redemption_history import router as RedemptionHistoryRouter
@@ -31,9 +32,11 @@ app.add_middleware(
 
 app.include_router(AuthRouter, tags=["Authentication"])
 app.include_router(UserRouter, tags=["User"], prefix="/user")
-app.include_router(VehicleRouter, tags=["Vehicle"], prefix="/vehicle")
+app.include_router(HouseRouter, tags=["House"], prefix="/house")
 app.include_router(RecommendationRouter, tags=[
                    "Recommendation"], prefix="/recommendation")
+
+app.include_router(VehicleRouter, tags=["Vehicle"], prefix="/vehicle")
 app.include_router(RedeemableRouter, tags=["Redeemable"], prefix="/redeemable")
 app.include_router(RedemptionHistoryRouter, tags=[
                    "RedemptionHistory"], prefix="/redemption_history")
