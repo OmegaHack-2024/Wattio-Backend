@@ -6,7 +6,7 @@ class UserSchema(BaseModel):
     name: str = Field(...)
     email: EmailStr = Field(...)
     password: str = Field(...)
-    points: float = Field(default=0.0)
+    house_id: Optional[int]
 
     class Config:
         schema_extra = {
@@ -14,6 +14,7 @@ class UserSchema(BaseModel):
                 "name": "Jane Doe",
                 "email": "jane.doe@wattio.com",
                 "password": "securepassword",
+                "house_id": "123"
             }
         }
 
@@ -22,7 +23,7 @@ class UpdateUserModel(BaseModel):
     name: Optional[str]
     email: Optional[EmailStr]
     password: Optional[str]
-    points: Optional[int]
+    house_id: Optional[int]
 
     class Config:
         schema_extra = {
@@ -30,6 +31,7 @@ class UpdateUserModel(BaseModel):
                 "name": "Jane M. Doe",
                 "email": "jane.doe@wattio.com",
                 "password": "newpassword",
+                "house_id": "123"
             }
         }
 
