@@ -14,7 +14,7 @@ class UserSchema(BaseModel):
                 "name": "John Doe",
                 "email": "john.doe@wattio.com",
                 "password": "securepassword",
-                "house_id": "123"
+                "house_id": "661bc0d2cdf7b602ac9902cc",
             }
         }
 
@@ -31,7 +31,7 @@ class UpdateUserModel(BaseModel):
                 "name": "john M. Doe",
                 "email": "john.doe@wattio.com",
                 "password": "newpassword",
-                "house_id": "123"
+                "house_id": "661bc0d2cdf7b602ac9902cc",
             }
         }
 
