@@ -4,31 +4,25 @@ from typing import Optional
 
 class HouseLogSchema(BaseModel):
     house_id: int = Field(..., description="The ID of the house this log belongs to")
-    start_time: datetime = Field(..., description="The start time of the aggregation period")
-    end_time: datetime = Field(..., description="The end time of the aggregation period")
-    average_wattage: float = Field(..., description="The average wattage used during the period")
-    total_wattage: float = Field(..., description="The total wattage consumed during the period")
+    timestamp: datetime = Field(..., description="The exact time the data was recorded")
+    powerConsumption: float = Field(..., description="The amount of wattage used at the recorded time")
 
     class Config:
         schema_extra = {
             "example": {
                 "house_id": 1,
-                "start_time": "2023-04-04T00:00:00",
-                "end_time": "2023-04-04T23:59:59",
-                "average_wattage": 320.5,
-                "total_wattage": 5000.0,
+                "timestamp": "2023-04-04T14:00:00",
+                "powerConsumption": 350.5,
             }
         }
 
 class UpdateHouseLogModel(BaseModel):
-    average_wattage: Optional[float] = Field(None, description="The average wattage used during the period")
-    total_wattage: Optional[float] = Field(None, description="The total wattage consumed during the period")
+    powerConsumption: Optional[float] = Field(None, description="The amount of wattage used at the recorded time")
 
     class Config:
         schema_extra = {
             "example": {
-                "average_wattage": 325.0,
-                "total_wattage": 5100.0,
+                "powerConsumption": 345.2,
             }
         }
 

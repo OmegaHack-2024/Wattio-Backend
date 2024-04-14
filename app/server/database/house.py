@@ -3,10 +3,6 @@ from .config import database
 
 house_collection = database.get_collection("houses_collection")
 
-# "owner_id": 1,
-#                 "address": "1234 Main St, Anytown, AT 12345",
-#                 "house_type": "Detached",
-#                 "number_of_rooms": 5,
 def house_helper(house) -> dict:
     return {
         "id": str(house["_id"]),
