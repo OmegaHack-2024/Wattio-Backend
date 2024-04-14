@@ -50,3 +50,5 @@ async def delete_house(id: str):
     if house:
         await house_collection.delete_one({"_id": ObjectId(id)})
         return True
+    
+

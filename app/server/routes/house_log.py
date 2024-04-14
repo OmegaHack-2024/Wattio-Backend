@@ -6,6 +6,7 @@ from server.database.house_log import (
     retrieve_house_log,
     retrieve_house_logs,
     update_house_log,
+    get_logs_by_house_id
 )
 
 from server.models.house_log import (
@@ -78,3 +79,11 @@ async def delete_house_log_data(
     return ErrorResponseModel(
         "An error occurred", 404, "HouseLog with id {0} doesn't exist".format(id)
     )
+
+@router.get("/logs/{house_id}", response_description="Get all logs from a house")
+async def get_logs(house_id: str):
+    logs = await get_logs_by_house_id(house_id)
+    if not logs:
+        return ResponseModel([], "No logs found for the provided house_id.")
+
+    return ResponseModel(logs, "Logs retrieved successfully.")

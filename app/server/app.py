@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from server.routes.user import router as UserRouter
-from server.routes.vehicle import router as VehicleRouter
 from server.routes.house import router as HouseRouter
 from server.routes.house_log import router as HouseLogRouter
 from server.routes.recommendation import router as RecommendationRouter

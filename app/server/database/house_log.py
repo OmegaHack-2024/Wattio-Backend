@@ -25,6 +25,24 @@ async def add_house_log(house_log_data: dict) -> dict:
     new_house_log = await house_log_collection.find_one({"_id": house_log.inserted_id})
     return house_log_helper(new_house_log)
 
+# Traer los logs de la casa x
+async def get_logs_by_house_id(house_id: str):
+    try:
+        house_id_obj = ObjectId(house_id)
+        query = {"house_id": house_id_obj}
+        house_logs = await house_log_collection.find(query).to_list(None)
+
+        if not house_logs:
+            return []
+
+        for log in house_logs:
+            log["_id"] = str(log["_id"])
+
+        return house_logs
+    except Exception as e:
+        return str(e)
+
+
 
 async def retrieve_house_log(id: str) -> dict:
     house_log = await house_log_collection.find_one({"_id": ObjectId(id)})
