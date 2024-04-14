@@ -30,17 +30,21 @@ async def get_current_user_details(current_user: dict = Depends(get_current_user
 
 
 @router.put("/me", response_description="Update current user details")
-async def update_current_user_details(req: UpdateUserModel = Body(...), current_user: dict = Depends(get_current_user)):
+async def update_current_user_details(
+    req: UpdateUserModel = Body(...), current_user: dict = Depends(get_current_user)
+):
     req = {k: v for k, v in req.dict().items() if v is not None}
-    
+
     # Check if 'password' is in the request and hash it before updating
     if "password" in req:
         req["password"] = get_password_hash(req["password"])
-    
+
     updated_user = await update_user(current_user["_id"], req)
     if updated_user:
         return ResponseModel("Update successful", "User data updated successfully")
-    return ErrorResponseModel("An error occurred", 404, "There was an error updating the user data.")
+    return ErrorResponseModel(
+        "An error occurred", 404, "There was an error updating the user data."
+    )
 
 
 @router.delete("/me", response_description="Delete current user")
@@ -48,11 +52,15 @@ async def delete_current_user_data(current_user: dict = Depends(get_current_user
     deleted_user = await delete_user(current_user["_id"])
     if deleted_user:
         return ResponseModel("User removed", "User deleted successfully")
-    return ErrorResponseModel("An error occurred", 404, "There was an error deleting the user.")
+    return ErrorResponseModel(
+        "An error occurred", 404, "There was an error deleting the user."
+    )
 
 
 @router.post("/", response_description="User data added into the database")
-async def add_user_data(user: UserSchema = Body(...), current_user: dict = Depends(get_current_user)):
+async def add_user_data(
+    user: UserSchema = Body(...), current_user: dict = Depends(get_current_user)
+):
     user = jsonable_encoder(user)
     new_user = await add_user(user)
     return ResponseModel(new_user, "User added successfully.")
@@ -76,13 +84,17 @@ async def get_user_data(id: str, current_user: dict = Depends(get_current_user))
 
 
 @router.put("/{id}", response_description="User data updated in the database")
-async def update_user_data(id: str, req: UpdateUserModel = Body(...), current_user: dict = Depends(get_current_user)):
+async def update_user_data(
+    id: str,
+    req: UpdateUserModel = Body(...),
+    current_user: dict = Depends(get_current_user),
+):
     req = {k: v for k, v in req.dict().items() if v is not None}
-    
+
     # Check if 'password' is in the request and hash it before updating
     if "password" in req:
         req["password"] = get_password_hash(req["password"])
-    
+
     updated_user = await update_user(id, req)
     if updated_user:
         return ResponseModel(
@@ -109,8 +121,7 @@ async def delete_user_data(id: str, current_user: dict = Depends(get_current_use
     deleted_user = await delete_user(id)
     if deleted_user:
         return ResponseModel(
-            "User with ID: {} removed".format(id),
-            "User deleted successfully"
+            "User with ID: {} removed".format(id), "User deleted successfully"
         )
     return ErrorResponseModel(
         "An error occurred", 404, "User with id {0} doesn't exist".format(id)

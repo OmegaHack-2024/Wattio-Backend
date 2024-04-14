@@ -12,15 +12,18 @@ def user_points_transaction_helper(transaction) -> dict:
         "transaction_type": transaction["transaction_type"],
         "points_amount": transaction["points_amount"],
         "date_and_time": transaction["date_and_time"],
-        "transaction_detail": transaction["transaction_detail"]
+        "transaction_detail": transaction["transaction_detail"],
     }
+
 
 # CRUD operations for User Points Transaction
 
 
 async def add_user_points_transaction(transaction_data: dict) -> dict:
     transaction = await user_points_transaction_collection.insert_one(transaction_data)
-    new_transaction = await user_points_transaction_collection.find_one({"_id": transaction.inserted_id})
+    new_transaction = await user_points_transaction_collection.find_one(
+        {"_id": transaction.inserted_id}
+    )
     return user_points_transaction_helper(new_transaction)
 
 

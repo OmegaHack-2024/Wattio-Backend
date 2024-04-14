@@ -16,7 +16,7 @@ class UserPointsTransactionSchema(BaseModel):
                 "transaction_type": "Earned",
                 "points_amount": 50,
                 "date_and_time": "10-10-2023 15:10:00",
-                "transaction_detail": "Ride completion"
+                "transaction_detail": "Ride completion",
             }
         }
 

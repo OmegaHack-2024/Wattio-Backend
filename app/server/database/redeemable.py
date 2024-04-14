@@ -25,7 +25,9 @@ async def retrieve_redeemables():
 
 async def add_redeemable(redeemable_data: dict) -> dict:
     redeemable = await redeemable_collection.insert_one(redeemable_data)
-    new_redeemable = await redeemable_collection.find_one({"_id": redeemable.inserted_id})
+    new_redeemable = await redeemable_collection.find_one(
+        {"_id": redeemable.inserted_id}
+    )
     return redeemable_helper(new_redeemable)
 
 
@@ -42,7 +44,9 @@ async def update_redeemable(id: str, data: dict):
             {"_id": ObjectId(id)}, {"$set": data}
         )
         if updated_redeemable:
-            return redeemable_helper(await redeemable_collection.find_one({"_id": ObjectId(id)}))
+            return redeemable_helper(
+                await redeemable_collection.find_one({"_id": ObjectId(id)})
+            )
 
 
 async def delete_redeemable(id: str):

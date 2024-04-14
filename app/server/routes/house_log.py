@@ -20,7 +20,10 @@ router = APIRouter()
 
 
 @router.post("/", response_description="HouseLog data added into the database")
-async def add_house_log_data(house_log: HouseLogSchema = Body(...), current_user: dict = Depends(get_current_user)):
+async def add_house_log_data(
+    house_log: HouseLogSchema = Body(...),
+    current_user: dict = Depends(get_current_user),
+):
     house_log = jsonable_encoder(house_log)
     new_house_log = await add_house_log(house_log)
     return ResponseModel(new_house_log, "HouseLog added successfully.")
@@ -44,7 +47,11 @@ async def get_house_log_data(id: str, current_user: dict = Depends(get_current_u
 
 
 @router.put("/{id}", response_description="HouseLog data updated in the database")
-async def update_house_log_data(id: str, req: UpdateHouseLogModel = Body(...), current_user: dict = Depends(get_current_user)):
+async def update_house_log_data(
+    id: str,
+    req: UpdateHouseLogModel = Body(...),
+    current_user: dict = Depends(get_current_user),
+):
     req = {k: v for k, v in req.dict().items() if v is not None}
     updated_house_log = await update_house_log(id, req)
     if updated_house_log:
@@ -60,14 +67,14 @@ async def update_house_log_data(id: str, req: UpdateHouseLogModel = Body(...), c
 
 
 @router.delete("/{id}", response_description="HouseLog data deleted from the database")
-async def delete_house_log_data(id: str, current_user: dict = Depends(get_current_user)):
+async def delete_house_log_data(
+    id: str, current_user: dict = Depends(get_current_user)
+):
     deleted_house_log = await delete_house_log(id)
     if deleted_house_log:
         return ResponseModel(
-            "HouseLog with ID: {} removed".format(id),
-            "HouseLog deleted successfully"
+            "HouseLog with ID: {} removed".format(id), "HouseLog deleted successfully"
         )
     return ErrorResponseModel(
-        "An error occurred", 404, "HouseLog with id {0} doesn't exist".format(
-            id)
+        "An error occurred", 404, "HouseLog with id {0} doesn't exist".format(id)
     )

@@ -3,6 +3,7 @@ from .config import database
 
 house_log_collection = database.get_collection("house_logs_collection")
 
+
 def house_log_helper(house_log) -> dict:
     return {
         "id": str(house_log["_id"]),

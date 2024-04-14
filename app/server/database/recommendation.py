@@ -1,8 +1,7 @@
 from bson.objectid import ObjectId
 from .config import database
 
-recommendation_collection = database.get_collection(
-    "recommendations_collection")
+recommendation_collection = database.get_collection("recommendations_collection")
 
 
 def recommendation_helper(recommendation) -> dict:
@@ -10,7 +9,7 @@ def recommendation_helper(recommendation) -> dict:
         "id": str(recommendation["_id"]),
         "title": recommendation["title"],
         "description": recommendation["description"],
-        "image_url": recommendation["image_url"]
+        "image_url": recommendation["image_url"],
     }
 
 
@@ -23,7 +22,9 @@ async def retrieve_recommendations():
 
 async def add_recommendation(recommendation_data: dict) -> dict:
     recommendation = await recommendation_collection.insert_one(recommendation_data)
-    new_recommendation = await recommendation_collection.find_one({"_id": recommendation.inserted_id})
+    new_recommendation = await recommendation_collection.find_one(
+        {"_id": recommendation.inserted_id}
+    )
     return recommendation_helper(new_recommendation)
 
 

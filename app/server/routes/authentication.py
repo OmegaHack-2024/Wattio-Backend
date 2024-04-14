@@ -19,6 +19,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
+
 # Utility function to hash password
 def get_password_hash(password):
     return pwd_context.hash(password)
@@ -37,7 +38,11 @@ async def register_user(user: UserSchema = Body(...)):
 async def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
     user = await retrieve_user_by_email(form_data.username)
     # Check if the 'password' key exists in the user dictionary
-    if not user or "password" not in user or not verify_password(form_data.password, user["password"]):
+    if (
+        not user
+        or "password" not in user
+        or not verify_password(form_data.password, user["password"])
+    ):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",

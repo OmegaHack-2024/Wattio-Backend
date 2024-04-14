@@ -11,7 +11,7 @@ class RecommendationSchema(BaseModel):
             "example": {
                 "title": "Duchas Más Cortas",
                 "description": "Intenta tomar duchas más cortas. Cuanta menos agua caliente utilices, menos energía se necesitará para calentar el agua.",
-                "image_url": "http://localhost:8000/static/images/ducha.png"
+                "image_url": "http://localhost:8000/static/images/ducha.png",
             }
         }
 

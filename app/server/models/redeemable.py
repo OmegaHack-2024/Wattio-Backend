@@ -7,7 +7,8 @@ class RedeemableSchema(BaseModel):
     points_required: int = Field(...)
     availability: bool = Field(default=True)
     expiry_date: Optional[str] = Field(
-        None, regex="^\d{2}-\d{2}-\d{4}$")  # Enforcing a DD-MM-YYYY format
+        None, regex="^\d{2}-\d{2}-\d{4}$"
+    )  # Enforcing a DD-MM-YYYY format
     category: Optional[str]
     image_url: Optional[str]
 
@@ -19,7 +20,7 @@ class RedeemableSchema(BaseModel):
                 "availability": True,
                 "expiry_date": "31-12-2023",
                 "category": "Food",
-                "image_url": "http://localhost:8000/static/redeemables/bono-frisby.jpg"
+                "image_url": "http://localhost:8000/static/redeemables/bono-frisby.jpg",
             }
         }
 

@@ -13,9 +13,9 @@ from server.routes.authentication import router as AuthRouter
 from fastapi.staticfiles import StaticFiles
 from decouple import config
 
-is_production = config('PROJECT_ENVIRONMENT', default="DEVELOPMENT")
+is_production = config("PROJECT_ENVIRONMENT", default="DEVELOPMENT")
 
-if is_production == 'RELEASE':
+if is_production == "RELEASE":
     app = FastAPI(
         docs_url=None,  # Disable docs (Swagger UI)
         redoc_url=None,  # Disable redoc
@@ -35,15 +35,20 @@ app.include_router(AuthRouter, tags=["Authentication"])
 app.include_router(UserRouter, tags=["User"], prefix="/user")
 app.include_router(HouseRouter, tags=["House"], prefix="/house")
 app.include_router(HouseLogRouter, tags=["HouseLog"], prefix="/house_log")
-app.include_router(RecommendationRouter, tags=[
-                   "Recommendation"], prefix="/recommendation")
+app.include_router(
+    RecommendationRouter, tags=["Recommendation"], prefix="/recommendation"
+)
 
 app.include_router(VehicleRouter, tags=["Vehicle"], prefix="/vehicle")
 app.include_router(RedeemableRouter, tags=["Redeemable"], prefix="/redeemable")
-app.include_router(RedemptionHistoryRouter, tags=[
-                   "RedemptionHistory"], prefix="/redemption_history")
-app.include_router(UserPointsTransactionRouter, tags=[
-                   "UserPointsTransaction"], prefix="/user_points_transaction")
+app.include_router(
+    RedemptionHistoryRouter, tags=["RedemptionHistory"], prefix="/redemption_history"
+)
+app.include_router(
+    UserPointsTransactionRouter,
+    tags=["UserPointsTransaction"],
+    prefix="/user_points_transaction",
+)
 app.include_router(RideRouter, tags=["Ride"], prefix="/ride")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

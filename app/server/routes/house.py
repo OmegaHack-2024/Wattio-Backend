@@ -20,7 +20,9 @@ router = APIRouter()
 
 
 @router.post("/", response_description="House data added into the database")
-async def add_house_data(house: HouseSchema = Body(...), current_user: dict = Depends(get_current_user)):
+async def add_house_data(
+    house: HouseSchema = Body(...), current_user: dict = Depends(get_current_user)
+):
     house = jsonable_encoder(house)
     new_house = await add_house(house)
     return ResponseModel(new_house, "House added successfully.")
@@ -44,7 +46,11 @@ async def get_house_data(id: str, current_user: dict = Depends(get_current_user)
 
 
 @router.put("/{id}", response_description="House data updated in the database")
-async def update_house_data(id: str, req: UpdateHouseModel = Body(...), current_user: dict = Depends(get_current_user)):
+async def update_house_data(
+    id: str,
+    req: UpdateHouseModel = Body(...),
+    current_user: dict = Depends(get_current_user),
+):
     req = {k: v for k, v in req.dict().items() if v is not None}
     updated_house = await update_house(id, req)
     if updated_house:
@@ -64,10 +70,8 @@ async def delete_house_data(id: str, current_user: dict = Depends(get_current_us
     deleted_house = await delete_house(id)
     if deleted_house:
         return ResponseModel(
-            "House with ID: {} removed".format(id),
-            "House deleted successfully"
+            "House with ID: {} removed".format(id), "House deleted successfully"
         )
     return ErrorResponseModel(
-        "An error occurred", 404, "House with id {0} doesn't exist".format(
-            id)
+        "An error occurred", 404, "House with id {0} doesn't exist".format(id)
     )

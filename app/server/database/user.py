@@ -56,5 +56,3 @@ async def delete_user(id: str):
     if user:
         await user_collection.delete_one({"_id": ObjectId(id)})
         return True
-
-

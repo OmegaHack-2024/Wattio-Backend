@@ -9,7 +9,7 @@ def vehicle_helper(vehicle) -> dict:
         "id": str(vehicle["_id"]),
         "name": vehicle["name"],
         "emission_gco2_per_km": vehicle["emission_gco2_per_km"],
-        "image_url": vehicle["image_url"]
+        "image_url": vehicle["image_url"],
     }
 
 

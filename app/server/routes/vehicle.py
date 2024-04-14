@@ -20,7 +20,9 @@ router = APIRouter()
 
 
 @router.post("/", response_description="Vehicle data added into the database")
-async def add_vehicle_data(vehicle: VehicleSchema = Body(...), current_user: dict = Depends(get_current_user)):
+async def add_vehicle_data(
+    vehicle: VehicleSchema = Body(...), current_user: dict = Depends(get_current_user)
+):
     vehicle = jsonable_encoder(vehicle)
     new_vehicle = await add_vehicle(vehicle)
     return ResponseModel(new_vehicle, "Vehicle added successfully.")
@@ -44,7 +46,11 @@ async def get_vehicle_data(id: str, current_user: dict = Depends(get_current_use
 
 
 @router.put("/{id}", response_description="Vehicle data updated in the database")
-async def update_vehicle_data(id: str, req: UpdateVehicleModel = Body(...), current_user: dict = Depends(get_current_user)):
+async def update_vehicle_data(
+    id: str,
+    req: UpdateVehicleModel = Body(...),
+    current_user: dict = Depends(get_current_user),
+):
     req = {k: v for k, v in req.dict().items() if v is not None}
     updated_vehicle = await update_vehicle(id, req)
     if updated_vehicle:
@@ -64,10 +70,8 @@ async def delete_vehicle_data(id: str, current_user: dict = Depends(get_current_
     deleted_vehicle = await delete_vehicle(id)
     if deleted_vehicle:
         return ResponseModel(
-            "Vehicle with ID: {} removed".format(id),
-            "Vehicle deleted successfully"
+            "Vehicle with ID: {} removed".format(id), "Vehicle deleted successfully"
         )
     return ErrorResponseModel(
-        "An error occurred", 404, "Vehicle with id {0} doesn't exist".format(
-            id)
+        "An error occurred", 404, "Vehicle with id {0} doesn't exist".format(id)
     )

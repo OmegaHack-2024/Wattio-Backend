@@ -18,6 +18,7 @@ def ride_helper(ride) -> dict:
         "polyline": ride.get("polyline", []),
     }
 
+
 # CRUD operations for Rides
 
 

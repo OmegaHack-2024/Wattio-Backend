@@ -14,7 +14,7 @@ class RedemptionHistorySchema(BaseModel):
                 "user_id": "605c72ef1532076878f9ebe5",
                 "redeemed_item_id": "605c72ef12234487909ebed2",
                 "date_and_time": "10-10-2023 15:10:00",
-                "points_spent": 100
+                "points_spent": 100,
             }
         }
 

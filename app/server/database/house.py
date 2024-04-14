@@ -3,12 +3,13 @@ from .config import database
 
 house_collection = database.get_collection("houses_collection")
 
+
 def house_helper(house) -> dict:
     return {
         "id": str(house["_id"]),
         "address": house["address"],
         "house_type": house["house_type"],
-        "number_of_rooms": house["number_of_rooms"]
+        "number_of_rooms": house["number_of_rooms"],
     }
 
 

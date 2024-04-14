@@ -1,8 +1,7 @@
 from bson.objectid import ObjectId
 from .config import database
 
-redemption_history_collection = database.get_collection(
-    "redemption_history_collection")
+redemption_history_collection = database.get_collection("redemption_history_collection")
 
 
 def redemption_history_helper(redemption) -> dict:
@@ -11,15 +10,18 @@ def redemption_history_helper(redemption) -> dict:
         "user_id": redemption["user_id"],
         "redeemed_item_id": redemption["redeemed_item_id"],
         "date_and_time": redemption["date_and_time"],
-        "points_spent": redemption["points_spent"]
+        "points_spent": redemption["points_spent"],
     }
+
 
 # CRUD operations for Redemption History
 
 
 async def add_redemption_history(redemption_data: dict) -> dict:
     redemption = await redemption_history_collection.insert_one(redemption_data)
-    new_redemption = await redemption_history_collection.find_one({"_id": redemption.inserted_id})
+    new_redemption = await redemption_history_collection.find_one(
+        {"_id": redemption.inserted_id}
+    )
     return redemption_history_helper(new_redemption)
 
 
