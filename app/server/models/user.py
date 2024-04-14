@@ -6,7 +6,7 @@ class UserSchema(BaseModel):
     name: str = Field(...)
     email: EmailStr = Field(...)
     password: str = Field(...)
-    house_id: Optional[int]
+    house_id: Optional[str]
 
     class Config:
         schema_extra = {
@@ -23,7 +23,7 @@ class UpdateUserModel(BaseModel):
     name: Optional[str]
     email: Optional[EmailStr]
     password: Optional[str]
-    house_id: Optional[int]
+    house_id: Optional[str]
 
     class Config:
         schema_extra = {
